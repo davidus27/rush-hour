@@ -8,10 +8,10 @@ class Color(Enum):
     orange = 2
     yellow = 3
     purple = 4
-    gray = 5
-    blue = 6
-    green = 7
-
+    green = 5
+    light_blue = 6
+    gray = 7
+    dark_blue = 8
 
 class Size(Enum):
     small = 2
