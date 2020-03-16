@@ -64,6 +64,25 @@ class Traffic(object):
             self.road[x][y] = vehicle.color.value
         return self
 
+    def right(self, vehicle, length):
+        if vehicle.direction is Direction.vertical:
+            return None
+            
+
+    def left(self, vehicle, length):
+        if vehicle.direction is Direction.vertical:
+            return None 
+
+    def up(self, vehicle, length):
+        if vehicle.direction is Direction.horizontal:
+            return None 
+        for i in range(1,length):
+            pass
+    def down(self, vehicle, length):
+        if vehicle.direction is Direction.horizontal:
+            return None 
+
+
 
 
 
