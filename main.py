@@ -10,7 +10,7 @@ def main():
     print(traffic.road)
     '''
     #new thingy
-    cars = generating.create_vehicles(generating.read_file("testing_config.txt"))
+    cars = generating.create_vehicles(generating.read_file("configs/testing_config.txt"))
     
        
 if __name__ == "__main__":
