@@ -1,7 +1,7 @@
 import zadanie
 
 def generate_cars():
-    cars = [zadanie.Vehicle(color = zadanie.Color(i+1), starting_position = [i,0]) for i in range(7)]
+    cars = [zadanie.Vehicle(color = c, starting_position = [index,0]) for index,c in enumerate(zadanie.Color)]
     
     for car in cars:
         car.size = zadanie.Size.medium
@@ -31,11 +31,10 @@ def create_vehicles(data):
         return None
 
     cars = []
-    print(data)
     for i in data: 
         color = evaluate_color(i[0])
         size = zadanie.Size(int(i[1]))
-        cordinates = ( (int(i[2]), int(i[3])) )
+        cordinates = ( (int(i[2]) -1 , int(i[3]) -1) )
         direction = zadanie.Direction(i[4])
         cars.append(zadanie.Vehicle(color, size, cordinates, direction))
     return cars

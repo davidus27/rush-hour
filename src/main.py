@@ -1,16 +1,15 @@
 import generating
+import zadanie
 
    
 def main():
-    cars = generating.generate_cars()
-    '''
+    cars = generating.create_vehicles(generating.read_file("../configs/testing_config.txt"))
+    print(cars)
+
     traffic = zadanie.Traffic()
     for car in cars:
             traffic.add_vehicle(car)
     print(traffic.road)
-    '''
-    #new thingy
-    cars = generating.create_vehicles(generating.read_file("../configs/testing_config.txt"))
     
        
 if __name__ == "__main__":

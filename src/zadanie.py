@@ -36,12 +36,17 @@ class Vehicle(object):
         for i in range(self.size.value):
             y = self.starting_position[0]
             x = self.starting_position[1]
-            if x < 0 or y < 0 or x + i > 6 or y +i > 6:
+            if x < 0 or y < 0:
                 return None
             if self.direction is Direction.vertical:
+                if y + i > 6:
+                    return None
                 positions.append((x,y+i))
             if self.direction is Direction.horizontal:
+                if x + i >6:
+                    return None
                 positions.append((x+i,y))
+        print("position", positions)
         return positions 
 
 
@@ -50,10 +55,11 @@ class Traffic(object):
         self.road = zeros((6,6))
 
     def add_vehicle(self, vehicle):
-        if vehicle.position is None:
+        positions = vehicle.position
+        if positions is None:
             return None
-        for position in vehicle.position:
-            y = position[0]
+        for position in positions:
+            y = position[0] 
             x = position[1]
             self.road[x][y] = vehicle.color.value
         return self
