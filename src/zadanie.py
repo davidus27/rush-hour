@@ -8,10 +8,10 @@ class Color(Enum):
     orange = 2
     yellow = 3
     purple = 4
-    gray = 5
-    blue = 6
-    green = 7
-
+    green = 5
+    light_blue = 6
+    gray = 7
+    dark_blue = 8
 
 class Size(Enum):
     small = 2
@@ -24,7 +24,7 @@ class Direction(Enum):
 
 
 class Vehicle(object):
-    def __init__(self, color = Color.none, starting_position = (0,0), size = Size.medium, direction = Direction.vertical):
+    def __init__(self, color = Color.none, size = Size.medium, starting_position = (0,0), direction = Direction.vertical):
         self.color = color
         self.starting_position = starting_position
         self.size = size
