@@ -38,4 +38,6 @@ def create_vehicles(data):
         direction = zadanie.Direction(i[4])
         cars.append(zadanie.Vehicle(color, size, cordinates, direction))
     return cars
- 
+    
+
+

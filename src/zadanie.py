@@ -83,6 +83,13 @@ class Traffic(object):
             return None 
 
 
+def check_ending(car, gate_position = (3,6), correct_direction = Direction.horizontal):
+    if car.direction is correct_direction and gate_position in car.positions:  
+        return True
+    else:
+        return False
+    
+
 
 
 
