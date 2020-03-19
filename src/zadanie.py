@@ -46,13 +46,14 @@ class Vehicle(object):
                 if x + i >6:
                     return None
                 positions.append((x+i,y))
-        print("position", positions)
         return positions 
-
+   
 
 class Traffic(object):
-    def __init__(self):
-        self.road = zeros((6,6))
+    def __init__(self, height = 6, width = 6):
+        self.road = zeros((width, height))
+        self.width = width
+        self.height = height
 
     def add_vehicle(self, vehicle):
         positions = vehicle.position
@@ -66,21 +67,55 @@ class Traffic(object):
 
     def right(self, vehicle, length):
         if vehicle.direction is Direction.vertical:
-            return None
-            
+            return False
+        for index in range(1,length + 1): 
+            y = vehicle.starting_position[0]
+            x = vehicle.starting_position[1] 
+            offset = x + vehicle.size.value - 1
+            if offset + index > self.width-1:
+                return False
+            if self.road[y][offset+index] != 0:
+                return False
+        return True
 
     def left(self, vehicle, length):
         if vehicle.direction is Direction.vertical:
-            return None 
+            return False
+        for index in range(1,length + 1): 
+            y = vehicle.starting_position[0]
+            x = vehicle.starting_position[1] 
+            if x - index < 0:
+                return False
+            if self.road[y][x-index] != 0:
+                return False
+        return True
 
     def up(self, vehicle, length):
         if vehicle.direction is Direction.horizontal:
-            return None 
-        for i in range(1,length):
-            pass
+            return False 
+        for index in range(1, length + 1): 
+            y = vehicle.starting_position[0]
+            x = vehicle.starting_position[1] 
+            if y - index < 0:
+                return False
+            if self.road[y-index][x] != 0:
+                return False
+        return True
+
+
     def down(self, vehicle, length):
         if vehicle.direction is Direction.horizontal:
-            return None 
+            return False
+        for index in range(1, length + 1): 
+            y = vehicle.starting_position[0]
+            x = vehicle.starting_position[1] 
+            offset = y + vehicle.size.value - 1
+            if offset + index > self.height-1:
+                return False
+            if self.road[offset+index][x] != 0:
+                return False
+        return True
+ 
 
 
 def check_ending(car, gate_position = (3,6), correct_direction = Direction.horizontal):
