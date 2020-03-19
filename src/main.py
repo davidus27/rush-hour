@@ -15,7 +15,6 @@ def main():
     print("Testing:")
     
     
-    print("{} car {} moves to the up: ".format(cars[4].color.name, 1), traffic.down(cars[4], 1))
     for index, car in enumerate(cars):
         print(index+1)
         for i in range(1,5):
@@ -26,7 +25,7 @@ def main():
                 print("{} car {} moves to the up: ".format(car.color.name, i), traffic.up(car, i))
                 print("{} car {} moves to the down: ".format(car.color.name, i), traffic.down(car, i))
 
-            
+    print(traffic.road)
     
 if __name__ == "__main__":
     main()

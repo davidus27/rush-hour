@@ -24,7 +24,7 @@ class Direction(Enum):
 
 
 class Vehicle(object):
-    def __init__(self, color = Color.none, size = Size.medium, starting_position = (0,0), direction = Direction.vertical):
+    def __init__(self, color = Color.none, size = Size.medium, starting_position = [0,0], direction = Direction.vertical):
         self.color = color
         self.starting_position = starting_position
         self.size = size
@@ -59,10 +59,20 @@ class Traffic(object):
         positions = vehicle.position
         if positions is None:
             return None
-        for position in positions:
-            y = position[0] 
-            x = position[1]
+        for pos in positions:
+            y = pos[0] 
+            x = pos[1]
             self.road[x][y] = vehicle.color.value
+        return self
+    
+    def remove_vehicle(self, vehicle):
+        positions = vehicle.position
+        if positions is None:
+            return None
+        for pos in positions:
+            y = pos[0]
+            x = pos[1]
+            self.road[x][y] = 0
         return self
 
     def right(self, vehicle, length):
@@ -76,6 +86,9 @@ class Traffic(object):
                 return False
             if self.road[y][offset+index] != 0:
                 return False
+        self.remove_vehicle(vehicle)
+        vehicle.starting_position[1] += length 
+        self.add_vehicle(vehicle)
         return True
 
     def left(self, vehicle, length):
@@ -88,6 +101,9 @@ class Traffic(object):
                 return False
             if self.road[y][x-index] != 0:
                 return False
+        self.remove_vehicle(vehicle)
+        vehicle.starting_position[1] -= length 
+        self.add_vehicle(vehicle)
         return True
 
     def up(self, vehicle, length):
@@ -100,6 +116,9 @@ class Traffic(object):
                 return False
             if self.road[y-index][x] != 0:
                 return False
+        self.remove_vehicle(vehicle)
+        vehicle.starting_position[0] -= length
+        self.add_vehicle(vehicle)
         return True
 
 
@@ -114,6 +133,10 @@ class Traffic(object):
                 return False
             if self.road[offset+index][x] != 0:
                 return False
+        self.remove_vehicle(vehicle)
+        vehicle.starting_position[0] += length
+        print(vehicle.starting_position)
+        self.add_vehicle(vehicle)
         return True
  
 
@@ -124,7 +147,3 @@ def check_ending(car, gate_position = (3,6), correct_direction = Direction.horiz
     else:
         return False
     
-
-
-
-

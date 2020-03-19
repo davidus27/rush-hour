@@ -34,7 +34,7 @@ def create_vehicles(data):
     for i in data: 
         color = evaluate_color(i[0])
         size = zadanie.Size(int(i[1]))
-        cordinates = ( (int(i[2]) -1 , int(i[3]) -1) )
+        cordinates = [ int(i[2]) -1 , int(i[3]) -1 ]
         direction = zadanie.Direction(i[4])
         cars.append(zadanie.Vehicle(color, size, cordinates, direction))
     return cars
