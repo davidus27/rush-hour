@@ -135,14 +135,12 @@ class Traffic(object):
                 return False
         self.remove_vehicle(vehicle)
         vehicle.starting_position[0] += length
-        print(vehicle.starting_position)
         self.add_vehicle(vehicle)
         return True
- 
 
 
-def check_ending(car, gate_position = (3,6), correct_direction = Direction.horizontal):
-    if car.direction is correct_direction and gate_position in car.positions:  
+def check_ending(car, gate_position = (5,2), correct_direction = Direction.horizontal):
+    if car.direction is correct_direction and gate_position in car.position:  
         return True
     else:
         return False

@@ -7,24 +7,23 @@ def main():
     print(cars)
     
     traffic = zadanie.Traffic()
-    for car in cars:
+    for index, car in enumerate(cars):
             traffic.add_vehicle(car)
-            print(car.color)
+            print(index, car.color)
     print(traffic.road)
 
     print("Testing:")
-    
-    
-    for index, car in enumerate(cars):
-        print(index+1)
-        for i in range(1,5):
-            if car.direction == zadanie.Direction.horizontal:
-                print("{} car {} moves to the right: ".format(car.color.name, i), traffic.right(car, i))
-                print("{} car {} moves to the left: ".format(car.color.name, i),traffic.left(car, i))
-            if car.direction == zadanie.Direction.vertical:
-                print("{} car {} moves to the up: ".format(car.color.name, i), traffic.up(car, i))
-                print("{} car {} moves to the down: ".format(car.color.name, i), traffic.down(car, i))
+    print(zadanie.check_ending(cars[0]))
+    print("{} car {} moves to the right: ".format(cars[1].color.name, 1), traffic.right(cars[1],1))
+    print("{} car {} moves to the right: ".format(cars[2].color.name, 1), traffic.up(cars[2],1))
+    print("{} car {} moves to the right: ".format(cars[3].color.name, 1), traffic.up(cars[3],1))
+    print("{} car {} moves to the right: ".format(cars[6].color.name, 3), traffic.left(cars[6],3))
 
+    print("{} car {} moves to the right: ".format(cars[5].color.name, 2), traffic.left(cars[5],2))
+    print("{} car {} moves to the right: ".format(cars[7].color.name, 3), traffic.down(cars[7],3))
+    print("{} car {} moves to the right: ".format(cars[4].color.name, 2), traffic.down(cars[4],2))
+    print("{} car {} moves to the right: ".format(cars[0].color.name, 3), traffic.right(cars[0],3))
+    print(zadanie.check_ending(cars[0]))
     print(traffic.road)
     
 if __name__ == "__main__":
