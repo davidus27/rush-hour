@@ -139,7 +139,7 @@ class Traffic(object):
         return True
 
 
-def check_ending(car, gate_position = (5,2), correct_direction = Direction.horizontal):
+def found_end(car, gate_position = (5,2), correct_direction = Direction.horizontal):
     if car.direction is correct_direction and gate_position in car.position:  
         return True
     else:
