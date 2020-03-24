@@ -1,9 +1,12 @@
 import generating
+import search
 
    
 def main():
     cars = generating.create_vehicles(generating.read_file("configs/testing_config.txt"))
     traffic = generating.generate_cars(cars)
+    
+    search.IterativeDeepening(traffic, cars)
 
     print(traffic.road)
 

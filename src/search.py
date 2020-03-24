@@ -1,7 +1,9 @@
 import control_unit
 
 
-class IterativeDeepeningSearch(object):
-    def __init__(self):
-        pass
+class IterativeDeepening(object):
+    def __init__(self, traffic, vehicles):
+        self.traffic = traffic
+        self.vehicles = vehicles
     
+
