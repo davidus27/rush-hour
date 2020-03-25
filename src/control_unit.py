@@ -54,6 +54,7 @@ class Traffic(object):
     def __init__(self, vehicles = [], height = 6, width = 6):
         self.vehicles = vehicles
         self.road = zeros((width, height))
+        self.path = []
         self.width = width
         self.height = height
 

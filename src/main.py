@@ -14,7 +14,9 @@ def main():
 
     print(traffic.road)
     #print(algo.dls(traffic, cars, 1))
-    print(algo.iddfs())
+    iddfs = algo.iddfs()
+    print(iddfs.road)
+    print(iddfs.path)
     
     
     """
