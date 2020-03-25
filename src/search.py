@@ -1,5 +1,4 @@
-import control_unit
-
+from control_unit import *
 
 class IterativeDeepening(object):
     def __init__(self, traffic, vehicles):
@@ -7,53 +6,60 @@ class IterativeDeepening(object):
         self.vehicles = vehicles    #red vehicle needs to be first
         self.path = [] #storing actual path from root
         
-    def _find_red(self):
-        for index, vehicle in enumerate(self.vehicles):
-            if vehicle.color == control_unit.Color.red:
-                return index
-        return None
-
-    def iddfs(self, root):
-        red_position = self._find_red()
+    def iddfs(self):
         #escaped = control_unit.is_goal(self.vehicles[red_position])
         depth = 0
         while True:
-            found, remaining = self.dls(root, depth)
+            found, remaining = self.dls(self.traffic, self.vehicles, depth)
             if found:
                 return found
             elif not remaining:
                 return None
             depth += 1
             #just testing
-            if depth > 3:
-                return
+            if depth > 20:
+                return False
 
-    def _unpack(self):
-        """
-        Returns list of operations that can be used in traffic
-        """
-        operations = []
-        for vehicle in self.vehicles:
-            if vehicle.direction == control_unit.Direction.horizontal:
-               operations.append(self.traffic.right)
-               operations.append(self.traffic.left)
-            else:
-               operations.append(self.traffic.up)
-               operations.append(self.traffic.down)
+    def dfs_iterative(self, depth):
+        pass
+   
+    def _actions(self,traffic, vehicle):
+        if vehicle.direction == Direction.horizontal:
+            return [right, left]
+        else:
+            return [up, down]
+
+    def get_neighbours(self, traffic, vehicles):
+        operations = [] #list of traffices
+        for vehicle in vehicles:
+            for index in range(1,5):
+                if vehicle.direction == Direction.horizontal:
+                    if check_right(traffic, vehicle, index):
+                        operations.append(right(traffic, vehicle, index))
+
+                    if check_left(traffic, vehicle, index):
+                        operations.append(left(traffic, vehicle, index))
+                else:
+                    if check_up(traffic, vehicle, index):
+                        operations.append(up(traffic, vehicle, index))
+
+                    if check_down(traffic, vehicle, index):
+                        operations.append(down(traffic, vehicle, index))
         return operations
-                
-    def dls(self, node, depth):
+            
+    def dls(self, traffic, vehicles, depth):
         if depth == 0:
-            if control_unit.is_goal(node): 
-                return node, True
+            if is_goal(traffic):
+                return traffic, True 
             else:
                 return None, True
-        elif depth > 0:
-            any_remaining = False
-            for child in node:
-                found, remaining = self.dls(child, depth-1)
-                if found:
-                    return found,True
-                if remaining:
-                    any_remaining = True
-            return None, any_remaining
+
+        any_remaining = False
+        for child in self.get_neighbours(traffic, vehicles):
+            found, remaing = self.dls(child, vehicles, depth-1)
+            if found:
+                return found, True
+            if remaing:
+                any_remaining = True
+
+        return None,any_remaining 
