@@ -1,4 +1,5 @@
 from enum import Enum
+from copy import deepcopy 
 from numpy import zeros
 
 
@@ -147,6 +148,107 @@ class Traffic(object):
         return True
 
 
+def add_vehicle(traffic, vehicle): 
+    positions = vehicle.position
+    if positions is None:
+        return None
+    for pos in positions:
+        y = pos[0] 
+        x = pos[1]
+        traffic.road[x][y] = vehicle.color.value
+    return True
+
+def remove_vehicle(traffic, vehicle):
+    positions = vehicle.position
+    if positions is None:
+        return None
+    for pos in positions:
+        y = pos[0]
+        x = pos[1]
+        traffic.road[x][y] = 0
+    return True
+
+def check_right(traffic, vehicle, length):
+    if vehicle.direction is Direction.vertical:
+        return False
+    for index in range(1,length + 1): 
+        y = vehicle.starting_position[0]
+        x = vehicle.starting_position[1] 
+        offset = x + vehicle.size.value - 1
+        if offset + index > traffic.width-1:
+            return False
+        if traffic.road[y][offset+index] != 0:
+            return False
+    return True
+
+
+def right(traffic, vehicle, length):
+    new = deepcopy(traffic)
+    new.remove_vehicle(vehicle)
+    vehicle.starting_position[1] += length
+    new.add_vehicle(vehicle)
+    return new
+
+def check_left(traffic, vehicle, length):
+    if vehicle.direction is Direction.vertical:
+        return False
+    for index in range(1,length + 1): 
+        y = vehicle.starting_position[0]
+        x = vehicle.starting_position[1] 
+        if x - index < 0:
+            return False
+        if traffic.road[y][x-index] != 0:
+            return False
+        return True
+
+def left(traffic, vehicle, length):
+    new = deepcopy(traffic)
+    new.remove_vehicle(vehicle)
+    vehicle.starting_position[1] -= length 
+    new.add_vehicle(vehicle)
+    return new
+
+def check_up(traffic, vehicle, length):
+    if vehicle.direction is Direction.horizontal:
+        return False 
+    for index in range(1, length + 1): 
+        y = vehicle.starting_position[0]
+        x = vehicle.starting_position[1] 
+        if y - index < 0:
+            return False
+        if traffic.road[y-index][x] != 0:
+            return False
+        return True
+
+def up(traffic, vehicle, length):
+    new = deepcopy(traffic)
+    new.remove_vehicle(vehicle)
+    vehicle.starting_position[0] -= length
+    new.add_vehicle(vehicle)
+    return new
+
+def check_down(traffic, vehicle, length):
+    if vehicle.direction is Direction.horizontal:
+        return False
+    for index in range(1, length + 1): 
+        y = vehicle.starting_position[0]
+        x = vehicle.starting_position[1] 
+        offset = y + vehicle.size.value - 1
+        if offset + index > traffic.height-1:
+            return False
+        if traffic.road[offset+index][x] != 0:
+            return False
+        return True
+
+def down(traffic, vehicle, length):
+    new = deepcopy(traffic)
+    new.remove_vehicle(vehicle)
+    vehicle.starting_position[0] += length
+    new.add_vehicle(vehicle)
+    return new
+
+
+#dont remove
 def _is_goal(car, gate_position = (5,2), correct_direction = Direction.horizontal): 
     if car.direction is correct_direction and gate_position in car.position:  
         return True

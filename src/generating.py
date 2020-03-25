@@ -2,7 +2,7 @@ import control_unit
 
 def generate_cars(cars):
     traffic = control_unit.Traffic()
-    for index, car in enumerate(cars):
+    for car in cars:
             traffic.add_vehicle(car)
     return traffic
 

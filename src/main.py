@@ -4,12 +4,20 @@ import search
 def main():
     cars = generating.create_vehicles(generating.read_file("configs/testing_config.txt"))
     traffic = generating.generate_cars(cars)
-    
-    algo = search.IterativeDeepening(traffic, cars)
 
     print(traffic.road)
-    print(algo.dfs(traffic, 2))
-    
+
+
+
+    algo = search.IterativeDeepening(traffic, cars)
+    for index, color in enumerate(generating.control_unit.Color):
+        print(index, color)
+
+    print(traffic.road)
+    #print(algo.dls(traffic, cars, 1))
+    #print(algo.iddfs())
+    for index, child in enumerate(algo.get_neighbours(traffic, cars)):
+        print(index, "\n", child.road)
     
     
     """
