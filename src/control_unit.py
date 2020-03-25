@@ -75,7 +75,7 @@ class Traffic(object):
             self.road[x][y] = 0
         return self
 
-    def right(self, vehicle, length):
+    def check_right(self, vehicle, length):
         if vehicle.direction is Direction.vertical:
             return False
         for index in range(1,length + 1): 
@@ -86,12 +86,15 @@ class Traffic(object):
                 return False
             if self.road[y][offset+index] != 0:
                 return False
-        self.remove_vehicle(vehicle)
-        vehicle.starting_position[1] += length 
-        self.add_vehicle(vehicle)
         return True
 
-    def left(self, vehicle, length):
+    def right(self, vehicle, length):
+        self.remove_vehicle(vehicle)
+        vehicle.starting_position[1] += length
+        self.add_vehicle(vehicle)
+        return self
+
+    def check_left(self, vehicle, length):
         if vehicle.direction is Direction.vertical:
             return False
         for index in range(1,length + 1): 
@@ -101,12 +104,14 @@ class Traffic(object):
                 return False
             if self.road[y][x-index] != 0:
                 return False
+
+    def left(self, vehicle, length):
         self.remove_vehicle(vehicle)
         vehicle.starting_position[1] -= length 
         self.add_vehicle(vehicle)
-        return True
+        return self
 
-    def up(self, vehicle, length):
+    def check_up(self, vehicle, length):
         if vehicle.direction is Direction.horizontal:
             return False 
         for index in range(1, length + 1): 
@@ -116,13 +121,14 @@ class Traffic(object):
                 return False
             if self.road[y-index][x] != 0:
                 return False
+
+    def up(self, vehicle, length):
         self.remove_vehicle(vehicle)
         vehicle.starting_position[0] -= length
         self.add_vehicle(vehicle)
         return True
 
-
-    def down(self, vehicle, length):
+    def check_down(self, vehicle, length):
         if vehicle.direction is Direction.horizontal:
             return False
         for index in range(1, length + 1): 
@@ -133,6 +139,8 @@ class Traffic(object):
                 return False
             if self.road[offset+index][x] != 0:
                 return False
+
+    def down(self, vehicle, length):
         self.remove_vehicle(vehicle)
         vehicle.starting_position[0] += length
         self.add_vehicle(vehicle)
@@ -145,6 +153,6 @@ def _is_goal(car, gate_position = (5,2), correct_direction = Direction.horizonta
     return False
 
 def is_goal(traffic):
-    if traffic[5][2] == Color.red.value and traffic[5][1] == Color.red.value:
+    if traffic.road[5][2] == Color.red.value and traffic.road[5][1] == Color.red.value:
         return True
     return False
