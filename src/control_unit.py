@@ -139,9 +139,12 @@ class Traffic(object):
         return True
 
 
-def found_end(car, gate_position = (5,2), correct_direction = Direction.horizontal):
+def _is_goal(car, gate_position = (5,2), correct_direction = Direction.horizontal): 
     if car.direction is correct_direction and gate_position in car.position:  
         return True
-    else:
-        return False
-    
+    return False
+
+def is_goal(traffic):
+    if traffic[5][2] == Color.red.value and traffic[5][1] == Color.red.value:
+        return True
+    return False
