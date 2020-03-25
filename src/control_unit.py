@@ -172,6 +172,6 @@ def _is_goal(car, gate_position = (5,2), correct_direction = Direction.horizonta
     return False
 
 def is_goal(traffic):
-    if traffic.road[5][2] == Color.red.value and traffic.road[5][1] == Color.red.value:
+    if traffic.road[2][5] == Color.red.value and traffic.road[2][4] == Color.red.value:
         return True
     return False

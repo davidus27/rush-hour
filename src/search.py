@@ -3,21 +3,22 @@ from control_unit import *
 class IterativeDeepening(object):
     def __init__(self, traffic, vehicles):
         self.traffic = traffic
-        self.vehicles = vehicles    #red vehicle needs to be first
+        #self.vehicles = vehicles    #red vehicle needs to be first
         self.path = [] #storing actual path from root
         
     def iddfs(self):
         #escaped = control_unit.is_goal(self.vehicles[red_position])
         depth = 0
         while True:
-            found, remaining = self.dls(self.traffic, self.vehicles, depth)
+            found, remaining = self.dls(self.traffic, self.traffic.vehicles, depth)
             if found:
                 return found
             elif not remaining:
                 return None
             depth += 1
+            print(depth)
             #just testing
-            if depth > 20:
+            if depth > 10:
                 return False
 
     def dfs_iterative(self, depth):

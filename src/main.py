@@ -14,9 +14,7 @@ def main():
 
     print(traffic.road)
     #print(algo.dls(traffic, cars, 1))
-    #print(algo.iddfs())
-    for index, child in enumerate(algo.get_neighbours(traffic)):
-        print(index, "\n", child.road)
+    print(algo.iddfs())
     
     
     """
