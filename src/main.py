@@ -4,7 +4,6 @@ import search
 def main():
     cars = generating.create_vehicles(generating.read_file("configs/testing_config.txt"))
     traffic = generating.generate_cars(cars)
-
     print(traffic.road)
 
 
@@ -16,7 +15,7 @@ def main():
     print(traffic.road)
     #print(algo.dls(traffic, cars, 1))
     #print(algo.iddfs())
-    for index, child in enumerate(algo.get_neighbours(traffic, cars)):
+    for index, child in enumerate(algo.get_neighbours(traffic)):
         print(index, "\n", child.road)
     
     

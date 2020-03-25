@@ -29,9 +29,9 @@ class IterativeDeepening(object):
         else:
             return [up, down]
 
-    def get_neighbours(self, traffic, vehicles):
+    def get_neighbours(self, traffic):
         operations = [] #list of traffices
-        for vehicle in vehicles:
+        for vehicle in traffic.vehicles:
             for index in range(1,5):
                 if vehicle.direction == Direction.horizontal:
                     if check_right(traffic, vehicle, index):
@@ -55,7 +55,7 @@ class IterativeDeepening(object):
                 return None, True
 
         any_remaining = False
-        for child in self.get_neighbours(traffic, vehicles):
+        for child in self.get_neighbours(traffic):
             found, remaing = self.dls(child, vehicles, depth-1)
             if found:
                 return found, True
