@@ -3,14 +3,13 @@ from control_unit import *
 class IterativeDeepening(object):
     def __init__(self, traffic, vehicles):
         self.traffic = traffic
-        #self.vehicles = vehicles    #red vehicle needs to be first
         self.path = [] #storing actual path from root
         
     def iddfs(self):
         #escaped = control_unit.is_goal(self.vehicles[red_position])
         depth = 0
         while True:
-            found, remaining = self.dls(self.traffic, self.traffic.vehicles, depth)
+            found, remaining = self.dls(self.traffic, depth)
             if found:
                 return found
             elif not remaining:
@@ -48,7 +47,7 @@ class IterativeDeepening(object):
                         operations.append(down(traffic, vehicle, index))
         return operations
             
-    def dls(self, traffic, vehicles, depth):
+    def dls(self, traffic, depth):
         if depth == 0:
             if is_goal(traffic):
                 return traffic, True 
@@ -57,7 +56,7 @@ class IterativeDeepening(object):
 
         any_remaining = False
         for child in self.get_neighbours(traffic):
-            found, remaing = self.dls(child, vehicles, depth-1)
+            found, remaing = self.dls(child, depth-1)
             if found:
                 return found, True
             if remaing:
