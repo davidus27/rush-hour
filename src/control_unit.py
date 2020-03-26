@@ -57,6 +57,10 @@ class Traffic(object):
         self.path = []
         self.width = width
         self.height = height
+    
+    def get_operations(self):
+        for path in self.path:
+            print("{}({}, {})".format(path[0], path[1],path[2]))
 
     def add_vehicle(self, vehicle):
         positions = vehicle.position
