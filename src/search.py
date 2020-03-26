@@ -1,5 +1,7 @@
 from control_unit import *
 
+
+
 class IterativeDeepening(object):
     def __init__(self, traffic, vehicles):
         self.traffic = traffic
@@ -12,10 +14,9 @@ class IterativeDeepening(object):
             found, remaining = self.dls(self.traffic, depth)
             if found:
                 return found
-            elif not remaining:
+            elif not remaining or depth >= 30:
                 return None
             depth += 1
-            print(depth)
             self.hash_table = []
 
     def _actions(self,traffic, vehicle):
