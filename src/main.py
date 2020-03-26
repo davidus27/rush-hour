@@ -1,38 +1,35 @@
 import generating
 import search
-   
+import time
+
+CONFIG_PATH = "configs/"
+
 def main():
-    cars = generating.create_vehicles(generating.read_file("configs/testing_config.txt"))
-    traffic = generating.generate_cars(cars)
-    print(traffic.road)
 
-
-
-    algo = search.IterativeDeepening(traffic, cars)
-    for index, color in enumerate(generating.control_unit.Color):
-        print(index, color)
-
-    print(traffic.road)
-    #print(algo.dls(traffic, cars, 1))
-    iddfs = algo.iddfs()
-    print(iddfs.road)
-    print(iddfs.path)
-    
-    
-    """
-    print("Testing:")
-    print("{} car {} moves to the right: ".format(cars[1].color.name, 1), traffic.right(cars[1],1))
-    print("{} car {} moves to the right: ".format(cars[2].color.name, 1), traffic.up(cars[2],1))
-    print("{} car {} moves to the right: ".format(cars[3].color.name, 1), traffic.up(cars[3],1))
-    print("{} car {} moves to the right: ".format(cars[6].color.name, 3), traffic.left(cars[6],3))
-
-    print("{} car {} moves to the right: ".format(cars[5].color.name, 2), traffic.left(cars[5],2))
-    print("{} car {} moves to the right: ".format(cars[7].color.name, 3), traffic.down(cars[7],3))
-    print("{} car {} moves to the right: ".format(cars[4].color.name, 2), traffic.down(cars[4],2))
-    print("{} car {} moves to the right: ".format(cars[0].color.name, 3), traffic.right(cars[0],3))
-    
-    print(traffic.road)
-    """
+    while(True):
+        number = input("Choose configuration[1-9]:")
+        if(number == "q"):
+            print("Ending")
+            break
+        config_file = CONFIG_PATH + "config" + number + ".txt"
+        cars = generating.create_vehicles(generating.read_file(config_file))
+        traffic = generating.generate_cars(cars)
+        print("Initial state:")
+        print(traffic.road)
+        print("Finding...")
+        algo = search.IterativeDeepening(traffic, cars)
+        start = time.time()
+        goal = algo.iddfs()
+        end = time.time()
+        if goal is None:
+            print("This configuration doesnt have goal state.")
+        else:
+            print("Goal state:")
+            print("Time elapsed:", end - start)
+            print(goal.road)
+            print("Operations:")
+            goal.get_operations()
+            
     
 if __name__ == "__main__":
     main()
