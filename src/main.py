@@ -12,8 +12,7 @@ def main():
         print("2: 7 vehicles, no result")
         print("3: 6 vehicles, 8 operations")
         print("4: 8 vehicles, 11 operations")
-        print("5: 7 vehicles, operations")
-        print("6: Hardest puzzle, 13 vehicles, 51 operations")
+        print("5: 7 vehicles, ")
         number = input("Choose configuration[1-9]:")
         if(number == "q"):
             print("Ending")

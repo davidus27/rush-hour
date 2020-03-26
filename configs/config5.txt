@@ -6,4 +6,4 @@ light_blue 3 6 3 h
 gray 2 5 5 h
 dark_blue 3 1 6 v
 black 2 1 5 v
-silver 2 5 3 h
+silver 2 2 2 h
