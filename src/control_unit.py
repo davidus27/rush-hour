@@ -13,6 +13,13 @@ class Color(Enum):
     light_blue = 6
     gray = 7
     dark_blue = 8
+    black = 9
+    brown = 10
+    gold = 11
+    indigo = 12
+    silver = 13
+
+
 
 class Size(Enum):
     small = 2
