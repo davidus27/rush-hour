@@ -7,6 +7,13 @@ CONFIG_PATH = "configs/"
 def main():
 
     while(True):
+        print("Configurations:")
+        print("1: 7 vehicles, 12 operations")
+        print("2: 7 vehicles, no result")
+        print("3:")
+        print("4:")
+        print("5: ")
+        print("6: Hardest puzzle, 13 vehicles, 51 operations")
         number = input("Choose configuration[1-9]:")
         if(number == "q"):
             print("Ending")
@@ -23,6 +30,7 @@ def main():
         end = time.time()
         if goal is None:
             print("This configuration doesnt have goal state.")
+            print("Time elapsed:", end - start)
         else:
             print("Goal state:")
             print("Time elapsed:", end - start)
