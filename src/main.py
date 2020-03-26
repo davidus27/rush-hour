@@ -5,14 +5,14 @@ import time
 CONFIG_PATH = "configs/"
 
 def main():
-
+    #Start of the program
     while(True):
         print("Configurations:")
         print("1: 7 vehicles, 12 operations")
         print("2: 7 vehicles, no result")
-        print("3:")
-        print("4:")
-        print("5: ")
+        print("3: 6 vehicles, 8 operations")
+        print("4: 8 vehicles, 11 operations")
+        print("5: 7 vehicles, operations")
         print("6: Hardest puzzle, 13 vehicles, 51 operations")
         number = input("Choose configuration[1-9]:")
         if(number == "q"):
@@ -35,7 +35,7 @@ def main():
             print("Goal state:")
             print("Time elapsed:", end - start)
             print(goal.road)
-            print("Operations:")
+            print("Operations[{}]:".format(len(goal.path)))
             goal.get_operations()
             
     

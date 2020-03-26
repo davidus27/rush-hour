@@ -40,6 +40,9 @@ class Vehicle(object):
 
     @property
     def position(self):
+        """
+        Returns all positional cordinates of car
+        """
         positions = []
         for i in range(self.size.value):
             y = self.starting_position[0]
@@ -66,10 +69,16 @@ class Traffic(object):
         self.height = height
     
     def get_operations(self):
+        """
+        Prints out all operations
+        """
         for path in self.path:
             print("{}({}, {})".format(path[0], path[1],path[2]))
 
     def add_vehicle(self, vehicle):
+        """
+        Adds vehicle to the roadmap
+        """
         positions = vehicle.position
         if positions is None:
             return None
@@ -80,6 +89,9 @@ class Traffic(object):
         return self 
 
     def remove_vehicle(self, vehicle):
+        """
+        Removes vehicle from the roadmap
+        """
         positions = vehicle.position
         if positions is None:
             return None
@@ -93,7 +105,7 @@ class Traffic(object):
 def check_right(traffic, vehicle, length):
     if vehicle.direction is Direction.vertical:
         return False
-    for index in range(1,length + 1): 
+    for index in range(1,length + 1):
         y = vehicle.starting_position[0]
         x = vehicle.starting_position[1] 
         offset = x + vehicle.size.value - 1

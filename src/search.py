@@ -8,7 +8,7 @@ class IterativeDeepening(object):
         self.path = [] #storing actual path from root
         self.hash_table = []
         
-    def iddfs(self, limit = 30):
+    def iddfs(self, limit = 55):
         depth = 0
         while True:
             found, remaining = self.dls(self.traffic, depth)
@@ -68,6 +68,7 @@ class IterativeDeepening(object):
         h = ''
         for v in value:
            h += str(v) 
+        h.replace(".","")
         return h
 
     def dls(self, traffic, depth):
