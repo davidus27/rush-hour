@@ -1,0 +1,13 @@
+red 2 3 4 h
+orange 3 1 1 v
+yellow 2 1 2 h
+purple 2 1 5 v
+green 2 2 2 v
+light_blue 2 2 3 v
+gray 3 2 6 v
+dark_blue 3 4 1 h
+black 2 4 4 v
+brown 2 5 3 v
+gold 2 5 5 h
+indigo 2 6 1 h
+silver 2 6 4 h
