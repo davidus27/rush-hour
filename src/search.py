@@ -9,6 +9,9 @@ class IterativeDeepening(object):
         self.hash_table = []
         
     def iddfs(self, limit = 55):
+        """
+        Iterative depth first search function
+        """
         depth = 0
         while True:
             found, remaining = self.dls(self.traffic, depth)
@@ -19,20 +22,22 @@ class IterativeDeepening(object):
             depth += 1
             self.hash_table = []
 
-    def _actions(self,traffic, vehicle):
-        if vehicle.direction == Direction.horizontal:
-            return [right, left]
-        else:
-            return [up, down]
 
     def _visited(self, traffic):
-        hash_value = self.hash(traffic)
+        """
+        Checks the hash_table if there is hash value, 
+        if not it will add it
+        """
+        hash_value = self.hash_function(traffic)
         if hash_value not in self.hash_table:
             self.hash_table.append(hash_value)
             return True
         return False
 
     def get_neighbours(self, traffic):
+        """
+        Creates list of computed copies of roadmap
+        """
         operations = []
         for vehicle in traffic.vehicles:
             for index in range(1,5):
@@ -63,7 +68,10 @@ class IterativeDeepening(object):
                             node.path.append(["down", vehicle.color.name, index])
         return operations
             
-    def hash(self, state):
+    def hash_function(self, state):
+        """
+        Computes hash value
+        """
         value = state.road.flatten()
         h = ''
         for v in value:
@@ -72,6 +80,9 @@ class IterativeDeepening(object):
         return h
 
     def dls(self, traffic, depth):
+        """
+        Performs improved version of depth first search 
+        """
         if depth == 0:
             if is_goal(traffic):
                 return traffic, True 
@@ -87,5 +98,4 @@ class IterativeDeepening(object):
                 return found, True
             if remaing:
                 any_remaining = True
-
         return None,any_remaining 

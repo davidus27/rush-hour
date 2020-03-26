@@ -103,6 +103,9 @@ class Traffic(object):
 
 
 def check_right(traffic, vehicle, length):
+    """
+    Control if vehicle can move to the right
+    """
     if vehicle.direction is Direction.vertical:
         return False
     for index in range(1,length + 1):
@@ -117,6 +120,9 @@ def check_right(traffic, vehicle, length):
 
 
 def right(traffic, vehicle, length):
+    """
+    Operation to move vehicle right
+    """
     new = deepcopy(traffic)
     new.remove_vehicle(vehicle)
     index = traffic.vehicles.index(vehicle)
@@ -125,6 +131,9 @@ def right(traffic, vehicle, length):
     return new
 
 def check_left(traffic, vehicle, length):
+    """
+    Control if vehicle can move to the left
+    """
     if vehicle.direction is Direction.vertical:
         return False
     for index in range(1,length + 1): 
@@ -137,15 +146,20 @@ def check_left(traffic, vehicle, length):
     return True
 
 def left(traffic, vehicle, length):
+    """
+    Operation to move vehicle left
+    """
     new = deepcopy(traffic)
     new.remove_vehicle(vehicle)
-   
     index = traffic.vehicles.index(vehicle)
     new.vehicles[index].starting_position[1] -= length
     new.add_vehicle(new.vehicles[index])
     return new
 
 def check_up(traffic, vehicle, length):
+    """
+    Control if vehicle can move up
+    """
     if vehicle.direction is Direction.horizontal:
         return False 
     for index in range(1, length + 1): 
@@ -158,15 +172,20 @@ def check_up(traffic, vehicle, length):
     return True
 
 def up(traffic, vehicle, length):
+    """
+    Operation to move vehicle up
+    """
     new = deepcopy(traffic)
     new.remove_vehicle(vehicle)
-    
     index = traffic.vehicles.index(vehicle)
     new.vehicles[index].starting_position[0] -= length
     new.add_vehicle(new.vehicles[index])
     return new
 
 def check_down(traffic, vehicle, length):
+    """
+    Control if vehicle can move down
+    """
     if vehicle.direction is Direction.horizontal:
         return False
     for index in range(1, length + 1): 
@@ -180,22 +199,21 @@ def check_down(traffic, vehicle, length):
     return True
 
 def down(traffic, vehicle, length):
-    new = deepcopy(traffic)
-    new.remove_vehicle(vehicle)
-   
+    """
+    Moving vehicle down in new copy of traffic
+    """
+    new = deepcopy(traffic) #making new copy of object
+    new.remove_vehicle(vehicle) #removing vehicle from roadmap
     index = traffic.vehicles.index(vehicle)
-    new.vehicles[index].starting_position[0] += length
-    new.add_vehicle(new.vehicles[index])
+    new.vehicles[index].starting_position[0] += length #moving position of the vehicle
+    new.add_vehicle(new.vehicles[index]) #adding changed vehicle to the traffic
     return new
 
 
-#dont remove
-def _is_goal(car, gate_position = (5,2), correct_direction = Direction.horizontal): 
-    if car.direction is correct_direction and gate_position in car.position:  
-        return True
-    return False
-
 def is_goal(traffic):
+    """
+    Finding goal state
+    """
     if traffic.road[2][5] == Color.red.value and traffic.road[2][4] == Color.red.value:
         return True
     return False
