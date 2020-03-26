@@ -12,7 +12,7 @@ def main():
         print("2: 7 vehicles, no result")
         print("3: 6 vehicles, 8 operations")
         print("4: 8 vehicles, 11 operations")
-        print("5: 7 vehicles, ")
+        print("5: 7 vehicles, 9 operations")
         number = input("Choose configuration[1-9]:")
         if(number == "q"):
             print("Ending")
